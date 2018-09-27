@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: BurningPaper
-  m_Shader: {fileID: 4800000, guid: 6f49023605d2e7b4fa22b55683e3007b, type: 3}
+  m_Name: TasselationDisplacementMat
+  m_Shader: {fileID: 4800000, guid: 38fba5acd9a6de14ba6f830f4ae8af9c, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -22,10 +22,6 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _BurningMask:
-        m_Texture: {fileID: 2800000, guid: 441dec1385c0f6d489ed132c4da544ec, type: 3}
-        m_Scale: {x: 0.5, y: 0.5}
-        m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -38,20 +34,24 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _DispTex:
+        m_Texture: {fileID: 2800000, guid: 60533d7179292e249b4abdcb5d7a543b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _FlameTex:
-        m_Texture: {fileID: 2800000, guid: b5e605b811fdc7f4188d85632623cda1, type: 3}
-        m_Scale: {x: 3, y: 3}
-        m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 0b5c9b5bd42b87640b911d591ffe72b6, type: 3}
+        m_Texture: {fileID: 2800000, guid: ffabc523ba0f5fe4286fc86375ffd191, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalMap:
+        m_Texture: {fileID: 2800000, guid: 99ef4db18f1bce04eaa9868d0075bf2f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -62,29 +62,30 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SpecGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
-    - _BurnStatus: 0.024
     - _Cutoff: 0.5
-    - _DestructionResistance: 0.946
     - _DetailNormalMapScale: 1
+    - _Displacement: 0.25
     - _DstBlend: 0
-    - _FireAggressiveness: 1.62
-    - _FlameResistance: 6.89
     - _GlossMapScale: 1
-    - _Glossiness: 0.251
+    - _Glossiness: 0.369
     - _GlossyReflections: 1
-    - _Metallic: 0.1
+    - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _SmokeResistance: 3.54
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _Tess: 11.2
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _FlameColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
