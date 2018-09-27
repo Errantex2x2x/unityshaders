@@ -10,7 +10,6 @@
 		_FlameColor("Flame color", Color) = (1,.2,.1,1)
 		_BurningMask("Burning mask", 2D) = "white" {}
 		_BurnStatus("Burn status", Range(0,1)) = 0.2
-		_FireAggressiveness("Fire aggressiveness", Range(1,3)) = 5
 		_SmokeResistance("Smoke resistance", Range(0,10)) = 1.0
 		_FlameResistance("Flame resistance", Range(0,10)) = 5.0
 		_DestructionResistance("Destruction resistance", Range(0,1)) = .9
@@ -18,6 +17,8 @@
 	SubShader {
 		Tags { "RenderType"="Opaque" }
 		LOD 200
+
+		Cull Off
 
 		CGPROGRAM
 		// Physically based Standard lighting model, and enable shadows on all light types
@@ -50,21 +51,15 @@
 			// put more per-instance properties here
 		UNITY_INSTANCING_BUFFER_END(Props)
 
-		void surf (Input IN, inout SurfaceOutputStandard o) {
+		void surf (Input IN, inout SurfaceOutputStandard o) 
+		{
 			// Albedo comes from a texture tinted by color
 			fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
 			
-			//float burnAmount = (_Time[0] * 5) % 1; //oscillating from 0 to 1
-			float burnAmount = _BurnStatus;//oscillating from 0 to 1
-			
 			float maskValue = tex2D(_BurningMask, IN.uv_BurningMask).r; //oscillating from 0 to 1
 			
-			//Schiaffone: avoiding already burned texture at frame 0
-			burnAmount += lerp(min(maskValue, burnAmount), maskValue, burnAmount * _FireAggressiveness);
-			
-			//alternative:
-			//burnAmount += maskValue;
-
+			float burnAmount = _BurnStatus * 2 - 1;//Remapping from -1 to 1
+			burnAmount += maskValue;
 			burnAmount = clamp(burnAmount, 0, 1);
 
 			//Smoke
@@ -75,6 +70,7 @@
 			float flameAmount = pow(burnAmount, _FlameResistance);
 			fixed4 flameColor = tex2D(_FlameTex, IN.uv_FlameTex) * _FlameColor; //oscillating from 0 to 1
 			c = lerp(c, flameColor, clamp(floor(flameAmount + .5), 0, 1));
+			
 			//Clip
 			clip(_DestructionResistance - burnAmount);
 
@@ -84,7 +80,6 @@
 			o.Metallic = _Metallic;
 			o.Smoothness = _Glossiness;
 			o.Alpha = c.a;
-
 		}
 		ENDCG
 	}
